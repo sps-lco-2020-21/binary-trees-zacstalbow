@@ -48,15 +48,31 @@ namespace BinaryTree1.lib
                     }
                 }
             }
+            public string ToString(Node node)
+            {
+                string result = "";
+                if (node == null)
+                {
+                    return "";
+                }
+                result += ToString(node.left);
+                result += ToString(node.right);
+                result += node.value.ToString();
+                return result;
+            }
 
-            
-            
-            
+            public int Count { get { return 1 + (left == null ? 0 : left.Count) + (right == null ? 0 : right.Count); } }
+
+            public override string ToString()
+            {
+                return $"{value}";
+            }
         }
 
         public class BinaryTree
         {
             public Node root { get; set; }
+
             
             public BinaryTree()
             {
@@ -67,25 +83,6 @@ namespace BinaryTree1.lib
             {
                 root = new Node(i);
             }
-
-            /* public Node Add(int i)  // my first Add() function //
-            {
-               if (root == null)
-                {
-                    Node root = new Node(i);
-                    root.value = i;
-                }
-               else if (i < root.value)
-                {
-                    root.left = Add(i);
-                }
-               else
-                {
-                    root.right = Add(i);
-                }
-                return root;
-            }*/
-
             public void Add(int i)
             {
                 Node new_node = new Node(i);
@@ -209,6 +206,7 @@ namespace BinaryTree1.lib
                                 previous_node.right = null;
                             }
                         }
+                        return;
                     }
                     else if (current_node.right == null) 
                     {
@@ -240,6 +238,21 @@ namespace BinaryTree1.lib
                 }
             }
 
+            public int Count
+            {
+                get
+                {
+                    return root == null ? 0 : root.Count;
+                }
+            }
+
+            public override string ToString()
+            {
+                if (root == null)
+                    return "count = 0";
+                return $"Count = {root.Count}";
+            }
         }
     }
 }
+
